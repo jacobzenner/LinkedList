@@ -91,37 +91,40 @@ void List::insert(const LElement num)
    LNodePtr newNode;
    LNodePtr nodePtr;
    LNodePtr previousNode = nullptr;
-
-   newNode = new LNode;
-   newNode->element = num;
-   
-   if (!head)
+   if(num)
    {
-      head = newNode;
-      newNode->next = nullptr;
-   }
-   else
-   {
-      nodePtr = head;
-      previousNode = nullptr;
-
-      while (nodePtr != nullptr && nodePtr->element < num)
-      {
-         previousNode = nodePtr;
-         nodePtr = nodePtr->next;
-      }
-
-      if (previousNode == nullptr)
+      newNode = new LNode;
+      newNode->element = num;
+      
+      if (!head)
       {
          head = newNode;
-         newNode->next = nodePtr;
+         newNode->next = nullptr;
       }
       else
       {
-         previousNode->next = newNode;
-         newNode->next = nodePtr;
+         nodePtr = head;
+         previousNode = nullptr;
+
+         while (nodePtr != nullptr && nodePtr->element < num)
+         {
+            previousNode = nodePtr;
+            nodePtr = nodePtr->next;
+         }
+
+         if (previousNode == nullptr)
+         {
+            head = newNode;
+            newNode->next = nodePtr;
+         }
+         else
+         {
+            previousNode->next = newNode;
+            newNode->next = nodePtr;
+         }
       }
    }
+   else cout << "Number was not inserted into the list." << endl;
    return;
 }
 
@@ -164,6 +167,10 @@ void List::remove(const LElement num)
          previousNode->next = nodePtr->next;
          delete nodePtr;
       }
+      else
+      {
+         cout << "The element " << num << " was not found in the list so it was not removed." << endl;
+      }
    }
    return;
 }
@@ -183,11 +190,15 @@ void List::view()const
 {
 	LNodePtr nP;
 	nP = head;
+   cout << "LIST -> ";
+
 
 	while(nP)
 	{
-		cout << nP->element << endl;
+		cout << nP->element << "-> ";
 		nP = nP ->next;
 	}
+
+   cout << "NULL" << endl;
    return;
 }
