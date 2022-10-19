@@ -72,8 +72,8 @@ List::~List()
 		nextNode = nP->next;
 		delete nP;
 		nP = nextNode;
-      return;
 	}	
+	return;
 }
 
 
